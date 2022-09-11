@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="ArchiveUnpacker.ArchiveUnpackerSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="600">
+    <StackPanel>
+            <TextBlock Text="7-Zip Path:"/>
+            <TextBox Text="{Binding Settings.OptionZPath}"/>
+            <TextBlock Text="Cache folder Path:"/>
+            <TextBox Text="{Binding Settings.OptionDestPath}"/>
+            <TextBlock Text="Cache folder Size:"/>
+            <StackPanel Orientation="Horizontal">
+                <Slider Width="200" VerticalAlignment="Center" Name="SliderValue"
+                                    Value="{Binding Settings.OptionSize, FallbackValue=5}" Minimum="1" Maximum="10"
+                                    IsSnapToTickEnabled="True" TickFrequency="1" />
+                <Label Content="{Binding ElementName=SliderValue, Path=Value}" 
+                                    ContentStringFormat=" {0} GB" Width="80" VerticalAlignment="Center"
+                                    Margin="10,0,0,0" HorizontalAlignment="Center" />
+            </StackPanel>
+        <TextBlock Text="Confirm before removing cache files:"/>
+        <CheckBox IsChecked="{Binding Settings.OptionConfirmDelete}"/>
+    </StackPanel>
+</UserControl>
