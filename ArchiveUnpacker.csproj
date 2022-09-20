@@ -49,9 +49,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArchiveUnpacker.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="ArchiveUnpacker.cs" />
     <Compile Include="ArchiveUnpackerSettings.cs" />
     <Compile Include="ArchiveUnpackerSettingsView.xaml.cs">
       <DependentUpon>ArchiveUnpackerSettingsView.xaml</DependentUpon>

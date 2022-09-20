@@ -16,47 +16,6 @@ using System.Windows.Controls;
 
 namespace ArchiveUnpacker
 {
-    partial class PopUp : Form
-    {
-        private System.Windows.Forms.TextBox textBox1;
-        public PopUp(string title, string message)
-        {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.SuspendLayout();
-            // 
-            // textBox1
-            // 
-            this.textBox1.Text = message;
-            this.textBox1.AutoSize = true;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Enabled = false;
-            this.textBox1.Multiline = false;
-            this.textBox1.ReadOnly = true;
-            //this.textBox1.Padding = new System.Windows.Forms.Padding(5);
-
-            // 
-            // Form1
-            // 
-            this.Controls.Add(this.textBox1);
-            this.Text = title;
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
-            this.AutoSize = true;
-            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.ControlBox = false;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.Padding = new System.Windows.Forms.Padding(5);
-
-            this.PerformAutoScale();
-
-            //this.MinimumSize = new System.Windows.Size(0, 0);
-
-            this.StartPosition = FormStartPosition.CenterScreen;
-        }
-    }
-
     public class ArchiveUnpacker : GenericPlugin
     {
         IPlayniteAPI myApi;
@@ -130,7 +89,7 @@ namespace ArchiveUnpacker
                 if (d > (long)1024 * 1024 * 1024 * settings.Settings.OptionSize)
                 {
                     sourceFile.WriteLine(d + " bigger than limit " + (long)1024 * 1024 * 1024 * settings.Settings.OptionSize);
-                    DialogResult dr = DialogResult.OK;
+                    MessageBoxResult mr = MessageBoxResult.OK;
                     if (settings.Settings.OptionConfirmDelete == true)
                     {
                         string files = "";
@@ -139,9 +98,9 @@ namespace ArchiveUnpacker
                             files += file + System.Environment.NewLine;
                         }
 
-                        dr = System.Windows.Forms.MessageBox.Show(files, "Removing cache folder", MessageBoxButtons.OKCancel);
+                        mr = PlayniteApi.Dialogs.ShowMessage(files, "Removing cache folder", MessageBoxButton.OKCancel);
                     }
-                    if (dr == DialogResult.OK)
+                    if (mr == MessageBoxResult.OK)
                     {
                         Directory.Delete(folder, true);
                         sourceFile.WriteLine(folder + " removed");
@@ -215,10 +174,6 @@ namespace ArchiveUnpacker
                     }
                     if (compressedFormats && !otherFormats) // Decompression required
                     {
-                        PopUp warning = new PopUp("Unpacking files", "Please wait for the process to finish");
-                        // Show the owned form.
-                        warning.Show();
-
                         //string destPath = @"C:\Playnite\";
                         string destPath = settings.Settings.OptionDestPath;
 
@@ -229,7 +184,20 @@ namespace ArchiveUnpacker
 
                         if (!Directory.Exists(destination))
                         {
-                            ExtractFile(source, destination);
+                            PlayniteApi.Dialogs.ActivateGlobalProgress((prg) =>
+                            {
+                                prg.ProgressMaxValue = 1;
+                                prg.CurrentProgressValue = -1;
+                                prg.Text = "Unpacking files";
+                                try
+                                {
+                                    ExtractFile(source, destination);
+                                }
+                                catch (Exception e)
+                                {
+                                }
+                            }, new GlobalProgressOptions("") { IsIndeterminate = true });
+
                             // Add original file reference for comparison
                             StreamWriter sourceFile = File.CreateText(destination + @"\source.txt");
                             sourceFile.WriteLine(source);
@@ -242,9 +210,6 @@ namespace ArchiveUnpacker
                         {
                             Directory.SetLastWriteTime(destination, DateTime.Now);
                         }
-
-                        // Close the owned form.
-                        warning.Close();
                     }
                 }
             }
