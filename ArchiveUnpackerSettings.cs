@@ -14,6 +14,7 @@ namespace ArchiveUnpacker
         private string optionDestPath = @"C:\Playnite\";
         private int optionSize = 5;
         private bool optionConfirmDelete = true;
+        private bool optionSaveDetails = true;
 
         private bool optionThatWontBeSaved = false;
 
@@ -21,6 +22,7 @@ namespace ArchiveUnpacker
         public string OptionDestPath { get => optionDestPath; set => SetValue(ref optionDestPath, value); }
         public int OptionSize { get => optionSize; set => SetValue(ref optionSize, value); }
         public bool OptionConfirmDelete { get => optionConfirmDelete; set => SetValue(ref optionConfirmDelete, value); }
+        public bool OptionSaveDetails { get => optionSaveDetails; set => SetValue(ref optionSaveDetails, value); }
         // Playnite serializes settings object to a JSON object and saves it as text file.
         // If you want to exclude some property from being saved then use `JsonDontSerialize` ignore attribute.
         [DontSerialize]
