@@ -19,7 +19,7 @@ Inside Playnite go into the Add-Ons menu (press F9) and in the submenu Generic -
 | Configuration                            | Default value                     | Description                                          |
 |------------------------------------------|-----------------------------------|------------------------------------------------------|
 | 7-Zip Path:                              | C:\Program Files\7-Zip\7z.exe     | Path of the 7zip executable file                     |
-| Cache folder Path:                       | C:\Playnite                       | Path of the cache folder                             |
+| Cache folder Path:                       | C:\Playnite\                      | Path of the cache folder                             |
 | Cache folder Size:                       | 5 GB                              | Size of the cache folder                             |
 | Confirm before removing cache files:     | Checked                           | Asks for confirmation before removing files          |
 | Save additional details:                 | Unchecked                         | Save additional info about the actions performed     |
@@ -36,8 +36,8 @@ Starting from an existing configuration, in example DuckStation built-in configu
 > ![Screenshot of duckstation built-in configuration](docs/duckstation_builtin.png)
 
 Create a new custom configuration, with following parameters:
-  * Name: you can choose the name, in this example `"DuckStation Archive"`
-  * Supported platform: same choice as in built-in configuration, in this example `"Sony Playstation"`
+  * Name: you can choose the name, in this example `DuckStation Archive`
+  * Supported platform: same choice as in built-in configuration, in this example `Sony Playstation`
   * Executable: path of Retroarch emulator, in this example `"C:\Emulators\Multi\RetroArch\retroarch.exe"`
   * Arguments: replace `"{ImagePath}"` from  built-in configuration with `"CACHE_FOLDER\{GameId}\{ImageNameNoExt}.EXTENSION"`, in this example `-L ".\cores\swanstation_libretro.dll" "C:\Playnite\{GameId}\{ImageNameNoExt}.cue"`
   * Working Directory: leave `{EmulatorDir}`
@@ -49,8 +49,8 @@ Starting from an existing configuration, in example PPSSPP built-in configuratio
 > ![Screenshot of ppsspp built-in configuration](docs/ppsspp_builtin.png)
 
 Create a new custom configuration, with following parameters:
-  * Name: you can choose the name, in this example `"PPSSPP Archive"`
-  * Supported platform: same choice as in built-in configuration, in this example `"Sony Playstation Portable"`
+  * Name: you can choose the name, in this example `PPSSPP Archive`
+  * Supported platform: same choice as in built-in configuration, in this example `Sony Playstation Portable`
   * Executable: path of the emulator, in this example `"C:\Emulators\Sony\ppsspp_win\PPSSPPWindows64.exe"`
   * Arguments: replace `"{ImagePath}"` from  built-in configuration with `"CACHE_FOLDER\{GameId}\{ImageNameNoExt}.EXTENSION"`, in this example `"C:\Playnite\{GameId}\{ImageNameNoExt}.iso" --pause-menu-exit --fullscreen`
   * Working Directory: leave `{EmulatorDir}`
