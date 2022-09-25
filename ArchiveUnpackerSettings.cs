@@ -14,7 +14,7 @@ namespace ArchiveUnpacker
         private string optionDestPath = @"C:\Playnite\";
         private int optionSize = 5;
         private bool optionConfirmDelete = true;
-        private bool optionSaveDetails = true;
+        private bool optionSaveDetails = false;
 
         private bool optionThatWontBeSaved = false;
 
