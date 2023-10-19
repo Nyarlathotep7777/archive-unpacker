@@ -177,9 +177,12 @@ namespace ArchiveUnpacker
         {
             try
             {
-                // Add code to be executed when game is preparing to be started.
                 IGameDatabase database = myApi.Database;
                 GameAction action = args.SourceAction;
+
+                // If it cannot access data structures it should exit quietly
+                if (action == null)
+                    return;
 
                 Guid guid = action.EmulatorId;
                 string profileId = action.EmulatorProfileId;

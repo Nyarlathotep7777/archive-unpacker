@@ -13,7 +13,7 @@
             <TextBlock Text="Cache folder Size:"/>
             <StackPanel Orientation="Horizontal">
                 <Slider Width="200" VerticalAlignment="Center" Name="SliderValue"
-                                    Value="{Binding Settings.OptionSize, FallbackValue=5}" Minimum="1" Maximum="10"
+                                    Value="{Binding Settings.OptionSize, FallbackValue=10}" Minimum="1" Maximum="30"
                                     IsSnapToTickEnabled="True" TickFrequency="1" />
                 <Label Content="{Binding ElementName=SliderValue, Path=Value}" 
                                     ContentStringFormat=" {0} GB" Width="80" VerticalAlignment="Center"
