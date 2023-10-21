@@ -181,7 +181,7 @@ namespace ArchiveUnpacker
                 GameAction action = args.SourceAction;
 
                 // If it cannot access data structures it should exit quietly
-                if (action == null)
+                if ((database == null) || (action == null))
                     return;
 
                 Guid guid = action.EmulatorId;
@@ -191,7 +191,10 @@ namespace ArchiveUnpacker
                 string profileName = database.Emulators.Get(guid).GetProfile(profileId).Name;
                 //MessageBox.Show(profileName, emulatorName);
 
-                //EmulatorProfile emulatorProfile = database.Emulators.Get(guid).GetProfile(profileId);
+                // If it cannot access data structures it should exit quietly
+                if (myApi.Database.Emulators.Get(guid).CustomProfiles == null)
+                    return;
+
                 foreach (CustomEmulatorProfile customProfile in myApi.Database.Emulators.Get(guid).CustomProfiles)
                 {
                     //MessageBox.Show(customProfile.ImageExtensions[1], customProfile.Name);
