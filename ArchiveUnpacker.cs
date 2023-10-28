@@ -187,6 +187,10 @@ namespace ArchiveUnpacker
                 Guid guid = action.EmulatorId;
                 string profileId = action.EmulatorProfileId;
 
+                // If it cannot access data structures it should exit quietly
+                if ((guid == null) || (profileId == null))
+                    return;
+
                 string emulatorName = database.Emulators.Get(guid).Name;
                 string profileName = database.Emulators.Get(guid).GetProfile(profileId).Name;
                 //MessageBox.Show(profileName, emulatorName);
